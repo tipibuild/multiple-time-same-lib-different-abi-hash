@@ -1,6 +1,5 @@
 {
   "file://../commonLib" : {
-
      "packages" : [ "commonLib" ]
     , "targets" : [ "commonLib::featuresForLibA" ]
   }

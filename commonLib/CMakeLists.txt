@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.17.0)
 
 project(commonLib VERSION "0.0.1")
 
-set(INCLUDE_FEATURES libByDefault otherThing)
+if (NOT DEFINED INCLUDE_FEATURES)
+  set(INCLUDE_FEATURES libByDefault otherThing)
+endif()
 
 set (generated_lib_on_demand "")
 set (generated_stringlib_on_demand "")
@@ -25,11 +27,11 @@ target_include_directories(commonLib BEFORE PUBLIC
 add_library(commonLib::commonLib ALIAS commonLib)
 foreach(SPECIAL_LIBNAME ${INCLUDE_FEATURES})
   message("Special name '${SPECIAL_LIBNAME}'")
-  add_library(commonLib_${SPECIAL_LIBNAME} commonlib_${SPECIAL_LIBNAME}.cpp)
-  target_include_directories(commonLib_${SPECIAL_LIBNAME} BEFORE PUBLIC
+  add_library(${SPECIAL_LIBNAME} commonlib_${SPECIAL_LIBNAME}.cpp)
+  target_include_directories(${SPECIAL_LIBNAME} BEFORE PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/> 
     $<INSTALL_INTERFACE:${include_install_dir}/>)
-  add_library(commonLib::${SPECIAL_LIBNAME} ALIAS commonLib_${SPECIAL_LIBNAME})
+  add_library(commonLib::${SPECIAL_LIBNAME} ALIAS ${SPECIAL_LIBNAME})
 endforeach()
 
 
@@ -73,7 +75,7 @@ configure_package_config_file(
 
 # Targets:
 install(
-    TARGETS commonLib ${generated_lib_on_demand}
+    TARGETS commonLib ${INCLUDE_FEATURES}
     EXPORT "${targets_export_name}"
     LIBRARY DESTINATION "lib"
     ARCHIVE DESTINATION "lib"
