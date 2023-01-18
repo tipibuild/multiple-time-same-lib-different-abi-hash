@@ -1,0 +1,5 @@
+commonLib/build
+libA/build
+libB/build
+main_project/build
+*.swp
