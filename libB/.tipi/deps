@@ -1,0 +1,6 @@
+{
+  "file://../commonLib" : {
+     "packages" : [ "commonLib" ]
+    , "targets" : [ "commonLib::commonLib", "commonLib::featuresForLibB" ]
+  }
+}
