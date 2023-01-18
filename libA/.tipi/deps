@@ -1,5 +1,5 @@
 {
-  "file://../commonLib" : {
+  "tipibuild/multiple-time-same-lib-different-abi-hash@file://../commonLib" : {
      "packages" : [ "commonLib" ]
     , "targets" : [ "commonLib::featuresForLibA" ]
   }

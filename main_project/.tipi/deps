@@ -1,4 +1,4 @@
 {
-  "file://../libA" : {}
-  , "file://../libB" : {}
+  "tipibuild/multiple-time-same-lib-different-abi-hash@file://../libA" : {}
+  , "tipibuild/multiple-time-same-lib-different-abi-hash@file://../libB" : {}
 }
