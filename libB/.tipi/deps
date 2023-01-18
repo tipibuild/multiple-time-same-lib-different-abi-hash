@@ -1,5 +1,6 @@
 {
   "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+     "opts" : "set (INCLUDE_FEATURES \"featuresForLibB\")",
      "packages" : [ "commonLib" ]
     , "targets" : [ "commonLib::commonLib", "commonLib::featuresForLibB" ]
   }

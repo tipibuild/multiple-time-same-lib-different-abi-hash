@@ -1,11 +1,13 @@
 {
   "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       },
   "tipibuild/multiple-time-same-lib-different-abi-hash@file://libA" : {
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       }
@@ -14,6 +16,7 @@
   , "tipibuild/multiple-time-same-lib-different-abi-hash@file://libB" : {
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       }
