@@ -7,7 +7,7 @@
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
          "packages" : [ "commonLib" ]
-        , "targets" : [ "commonLib::featuresForLibA" ]
+        , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       }
     }
   }
@@ -15,7 +15,7 @@
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
          "packages" : [ "commonLib" ]
-        , "targets" : [ "commonLib::commonLib", "commonLib::featuresForLibB" ]
+        , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       }
     }
   }
