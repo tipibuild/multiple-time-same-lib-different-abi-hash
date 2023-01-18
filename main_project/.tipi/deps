@@ -1,12 +1,15 @@
 {
   "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "@" : "feature/user-tries-to-fix-it-with-opts-key",
          "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
       },
   "tipibuild/multiple-time-same-lib-different-abi-hash@file://libA" : {
+    "@" : "feature/user-tries-to-fix-it-with-opts-key",
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "@" : "feature/user-tries-to-fix-it-with-opts-key",
          "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
@@ -14,8 +17,10 @@
     }
   }
   , "tipibuild/multiple-time-same-lib-different-abi-hash@file://libB" : {
+    "@" : "feature/user-tries-to-fix-it-with-opts-key",
     "requires" : {
       "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+         "@" : "feature/user-tries-to-fix-it-with-opts-key",
          "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\")",
          "packages" : [ "commonLib" ]
         , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
