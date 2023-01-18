@@ -1,1 +1,1 @@
-### COMMENTED OUT set (INCLUDE_FEATURES "featuresForLibA;featuresForLibB")
+set (INCLUDE_FEATURES "featuresForLibA;featuresForLibB")
