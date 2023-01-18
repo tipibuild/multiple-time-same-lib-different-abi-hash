@@ -2,23 +2,38 @@ cmake_minimum_required(VERSION 3.17.0)
 
 project(commonLib VERSION "0.0.1")
 
-option(INCLUDE_FEATURES " features string " )
-add_definitions(-DINCLUDE_FEATURES="${INCLUDE_FEATURES}")
-add_executable(testexec testexec.cpp)
+set(INCLUDE_FEATURES libByDefault otherThing)
 
-add_library(commonLib commonlib.cpp)
-
-add_library(commonLib::commonLib ALIAS commonLib)
-foreach(ITEM ${INCLUDE_FEATURES})
-  add_library(commonLib::${ITEM} ALIAS commonLib)
+set (generated_lib_on_demand "")
+set (generated_stringlib_on_demand "")
+foreach(SPECIAL_LIBNAME ${INCLUDE_FEATURES})
+  list(APPEND generated_lib_on_demand commonLib_${SPECIAL_LIBNAME})
+  set(generated_stringlib_on_demand "${generated_stringlib_on_demand} ${SPECIAL_LIBNAME}")
 endforeach()
 
 
+add_definitions(-DINCLUDE_FEATURES="${generated_stringlib_on_demand}")
+add_executable(testexec testexec.cpp)
+
+add_library(commonLib commonlib.cpp)
 
 set(include_install_dir "include")
 target_include_directories(commonLib BEFORE PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/> 
   $<INSTALL_INTERFACE:${include_install_dir}/>)
+
+add_library(commonLib::commonLib ALIAS commonLib)
+foreach(SPECIAL_LIBNAME ${INCLUDE_FEATURES})
+  message("Special name '${SPECIAL_LIBNAME}'")
+  add_library(commonLib_${SPECIAL_LIBNAME} commonlib_${SPECIAL_LIBNAME}.cpp)
+  target_include_directories(commonLib_${SPECIAL_LIBNAME} BEFORE PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/> 
+    $<INSTALL_INTERFACE:${include_install_dir}/>)
+  add_library(commonLib::${SPECIAL_LIBNAME} ALIAS commonLib_${SPECIAL_LIBNAME})
+endforeach()
+
+
+
 
 # Installing
 
@@ -58,13 +73,14 @@ configure_package_config_file(
 
 # Targets:
 install(
-    TARGETS commonLib
+    TARGETS commonLib ${generated_lib_on_demand}
     EXPORT "${targets_export_name}"
     LIBRARY DESTINATION "lib"
     ARCHIVE DESTINATION "lib"
     RUNTIME DESTINATION "bin"
     INCLUDES DESTINATION "${include_install_dir}"
 )
+
 
 # Headers:
 install(
