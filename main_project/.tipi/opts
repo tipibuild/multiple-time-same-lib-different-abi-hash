@@ -1,1 +1,1 @@
-set (INCLUDE_FEATURES "featuresForLibA;featuresForLibB")
+set (INCLUDE_FEATURES "featuresForLibA;featuresForLibB") # Im from main project
