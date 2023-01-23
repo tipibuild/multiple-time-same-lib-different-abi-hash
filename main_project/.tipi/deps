@@ -1,18 +1,31 @@
 {
    "tipibuild/multiple-time-same-lib-different-abi-hash@file://libA" : {
-      "@" : "feature/user-tries-to-fix-it-with-opts-key",
-      "requires" : {
-        "tipibuild/multiple-time-same-lib-different-abi-hash@file://libB" : {
-          "@" : "feature/user-tries-to-fix-it-with-opts-key",
-          "requires" : {
-            "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+    "id" : {"host_name":"daminetreg","org_name":"local_org","repo_name":"libA"},
+    "@" : "feature/user-tries-to-fix-it-with-opts-key",
+    "opts" : " ",
+    "requires" : {
+        "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+            "id" : {"host_name":"daminetreg","org_name":"local_org","repo_name":"commonLib"},
+            "@" : "feature/user-tries-to-fix-it-with-opts-key"
+            , "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\") # Im from deps libA ******"
+            , "packages" : [ "commonLib" ]
+            , "targets" : [  "commonLib::featuresForLibA",  "commonLib::featuresForLibB"  ]
+          }
+
+      , "tipibuild/multiple-time-same-lib-different-abi-hash@file://libB" : {
+        "id" : {"host_name":"daminetreg","org_name":"local_org","repo_name":"libB"},
+        "@" : "feature/user-tries-to-fix-it-with-opts-key",
+        "opts" : " ",
+        "requires" : {
+          "tipibuild/multiple-time-same-lib-different-abi-hash@file://commonLib" : {
+              "id" : {"host_name":"daminetreg","org_name":"local_org","repo_name":"commonLib"},
               "@" : "feature/user-tries-to-fix-it-with-opts-key"
-              , "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\") # Im from deps ******"
+              , "opts" : "set (INCLUDE_FEATURES \"featuresForLibA;featuresForLibB\") # Im from deps libA ******"
               , "packages" : [ "commonLib" ]
-              , "targets" : [ "commonLib::featuresForLibA", "commonLib::featuresForLibB" ]
+              , "targets" : [  "commonLib::featuresForLibA",  "commonLib::featuresForLibB"  ]
             }
           }
         }
-      }
+    }
   }
 }
